@@ -1441,6 +1441,100 @@
     </div>
 </section>
 
+    <section data-tela="historico-de-corridas" class="hidden">
+      <div class="px-5 pt-6 pb-24 animate-fadeIn">
+        <div class="flex items-center justify-between mb-1">
+          <div>
+            <h1 class="font-display text-2xl font-bold text-marca-900 tracking-tight">Histórico</h1>
+            <p class="text-sm text-gray-500 mt-0.5 font-body">Suas corridas e viagens</p>
+          </div>
+          <button onclick="mostrarTela('notificacoes')" class="relative w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center shadow-sm hover:shadow-md transition-all active:scale-95" aria-label="Notificações">
+            <svg class="w-5 h-5 text-marca-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mt-5">
+          <div class="card p-3 text-center">
+            <p class="text-xs text-gray-500 font-body">Gasto Total</p>
+            <p class="font-display text-lg font-bold text-marca-900 mt-1" id="hist-gasto-total">R$ 0</p>
+            <p class="text-[10px] text-green-600 font-medium mt-0.5">↓ 12% vs mês</p>
+          </div>
+          <div class="card p-3 text-center">
+            <p class="text-xs text-gray-500 font-body">Corridas</p>
+            <p class="font-display text-lg font-bold text-marca-900 mt-1" id="hist-total-corridas">0</p>
+            <p class="text-[10px] text-green-600 font-medium mt-0.5">↑ 3 vs mês</p>
+          </div>
+          <div class="card p-3 text-center">
+            <p class="text-xs text-gray-500 font-body">Média</p>
+            <p class="font-display text-lg font-bold text-marca-900 mt-1" id="hist-media-valor">R$ 0</p>
+            <p class="text-[10px] text-gray-400 font-medium mt-0.5">por viagem</p>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <h2 class="font-display text-sm font-semibold text-marca-900 mb-3">Faturamento Mensal</h2>
+          <div class="card p-4">
+            <svg viewBox="0 0 340 120" class="w-full h-28">
+              <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563EB" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#2563EB" stop-opacity="0.3"/>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="108" x2="340" y2="108" stroke="#e5e7eb" stroke-width="1"/>
+              <rect x="16" y="60" width="26" height="48" rx="4" fill="url(#barGrad)"/>
+              <rect x="58" y="42" width="26" height="66" rx="4" fill="url(#barGrad)"/>
+              <rect x="100" y="55" width="26" height="53" rx="4" fill="url(#barGrad)"/>
+              <rect x="142" y="30" width="26" height="78" rx="4" fill="url(#barGrad)"/>
+              <rect x="184" y="48" width="26" height="60" rx="4" fill="url(#barGrad)"/>
+              <rect x="226" y="22" width="26" height="86" rx="4" fill="url(#barGrad)"/>
+              <rect x="268" y="38" width="26" height="70" rx="4" fill="url(#barGrad)"/>
+              <rect x="310" y="52" width="26" height="56" rx="4" fill="url(#barGrad)" opacity="0.4"/>
+              <text x="29" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Ago</text>
+              <text x="71" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Set</text>
+              <text x="113" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Out</text>
+              <text x="155" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Nov</text>
+              <text x="197" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Dez</text>
+              <text x="239" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Jan</text>
+              <text x="281" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Fev</text>
+              <text x="323" y="118" text-anchor="middle" fill="#9ca3af" font-size="9" font-family="Inter,sans-serif">Mar</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <div class="flex gap-2 mb-3 overflow-x-auto pb-1 -mx-5 px-5" id="hist-filtros">
+            <button data-filtro="todas" class="hist-filtro-btn shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold font-body transition-all bg-marca-900 text-white shadow-md">Todas</button>
+            <button data-filtro="concluida" class="hist-filtro-btn shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold font-body transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">Concluídas</button>
+            <button data-filtro="cancelada" class="hist-filtro-btn shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold font-body transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">Canceladas</button>
+          </div>
+
+          <div class="relative mb-3">
+            <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            <input type="date" id="hist-busca-data" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm font-body text-marca-900 focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all" placeholder="Filtrar por data">
+          </div>
+
+          <div id="hist-lista" class="space-y-3"></div>
+          <div id="hist-vazio" class="hidden text-center py-12">
+            <div class="w-16 h-16 mx-auto rounded-full bg-gray-100 flex items-center justify-center mb-3">
+              <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125H18.75M3.375 14.25h15.75M3.375 14.25v4.5m14.25-4.5v4.5"/></svg>
+            </div>
+            <p class="font-body text-sm text-gray-500">Nenhuma corrida encontrada</p>
+            <p class="font-body text-xs text-gray-400 mt-1">Tente alterar os filtros</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="hist-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="historico_de_corridas_fecharModal()"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[92%] overflow-y-auto shadow-2xl animate-slideUp" id="hist-modal-conteudo"></div>
+      </div>
+    </section>
+```
+
+```html
+
     <!-- TELAS -->
       </div>
     </main>
