@@ -2548,6 +2548,344 @@
     </script>
 </section>
 
+    <section data-tela="painel-administrativo" class="hidden">
+      <div class="px-4 py-4 space-y-5">
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="font-display text-xl font-bold text-marca-900">Painel Administrativo</h1>
+            <p class="text-sm text-marca-500 mt-0.5">Visão geral da plataforma</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="painel_administrativo_toggleNotificacoes()" class="relative w-10 h-10 rounded-xl bg-white border border-marca-200 flex items-center justify-center active:scale-95 transition-all hover:shadow-sm">
+              <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              <span id="painel-badge-notif" class="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">3</span>
+            </button>
+            <button onclick="abrirModal(painel_administrativo_modalNotificacoes(), 'Notificações')" class="w-10 h-10 rounded-xl bg-marca-600 flex items-center justify-center active:scale-95 transition-all hover:bg-marca-700 shadow-md shadow-marca-600/20">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="mostrarTela('historico-de-corridas')">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center"><svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+              <span class="text-xs text-marca-500 font-medium">Passageiros</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-marca-900">1.284</p>
+            <div class="flex items-center gap-1 mt-1"><span class="text-[10px] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">+12%</span><span class="text-[10px] text-marca-400">vs mês ant.</span></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center"><svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+              <span class="text-xs text-marca-500 font-medium">Motoristas</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-marca-900">87</p>
+            <div class="flex items-center gap-1 mt-1"><span class="text-[10px] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">+5</span><span class="text-[10px] text-marca-400">ativos agora</span></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="mostrarTela('historico-de-corridas')">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center"><svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
+              <span class="text-xs text-marca-500 font-medium">Corridas Hoje</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-marca-900">342</p>
+            <div class="flex items-center gap-1 mt-1"><span class="text-[10px] font-semibold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">+8%</span><span class="text-[10px] text-marca-400">vs ontem</span></div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center"><svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <span class="text-xs text-marca-500 font-medium">Diárias (mês)</span>
+            </div>
+            <p class="font-display text-2xl font-bold text-marca-900">R$ 4.560</p>
+            <div class="flex items-center gap-1 mt-1"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">23 pend.</span><span class="text-[10px] text-marca-400">diárias</span></div>
+          </div>
+        </div>
+
+        <!-- Pending Drivers Alert -->
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-4 border border-amber-200">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-display font-bold text-amber-900 text-sm">Aprovações Pendentes</p>
+              <p class="text-xs text-amber-700 mt-0.5">23 motoristas aguardando análise de cadastro</p>
+              <button onclick="painel_administrativo_mostrarPendentes()" class="mt-2 px-4 py-1.5 bg-amber-500 text-white text-xs font-semibold rounded-lg active:scale-95 transition-all hover:bg-amber-600 shadow-sm">Ver Pendentes</button>
+            </div>
+            <span class="bg-amber-500 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0">23</span>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="space-y-4">
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-bold text-marca-900 text-sm">Corridas por Hora</h3>
+              <span class="text-xs text-marca-400">Hoje</span>
+            </div>
+            <svg viewBox="0 0 340 130" class="w-full h-auto">
+              <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563EB" stop-opacity="0.3"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0.02"/></linearGradient>
+              </defs>
+              <line x1="30" y1="115" x2="330" y2="115" stroke="#E2E8F0" stroke-width="1"/>
+              <rect x="36" y="75" width="16" height="40" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="62" y="50" width="16" height="65" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="88" y="30" width="16" height="85" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="114" y="15" width="16" height="100" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="140" y="10" width="16" height="105" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="166" y="8" width="16" height="107" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="192" y="12" width="16" height="103" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="218" y="25" width="16" height="90" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="244" y="40" width="16" height="75" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="270" y="55" width="16" height="60" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="296" y="65" width="16" height="50" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <rect x="322" y="80" width="16" height="35" rx="3" fill="url(#barGrad)" stroke="#2563EB" stroke-width="1.5" class="origin-bottom hover:opacity-80 transition-opacity"/>
+              <text x="44" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">6h</text>
+              <text x="96" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">8h</text>
+              <text x="148" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">10h</text>
+              <text x="200" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">12h</text>
+              <text x="252" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">14h</text>
+              <text x="304" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">16h</text>
+              <text x="330" y="108" text-anchor="middle" fill="#94A3B8" font-size="8">18h</text>
+            </svg>
+          </div>
+
+          <div class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-bold text-marca-900 text-sm">Demanda por Região</h3>
+              <span class="text-xs text-marca-400">Hoje</span>
+            </div>
+            <div class="space-y-3">
+              <div><div class="flex justify-between mb-1"><span class="text-xs text-marca-600 font-medium">Centro</span><span class="text-xs text-marca-500">142 corridas</span></div><div class="h-2 bg-marca-100 rounded-full overflow-hidden"><div class="h-full bg-marca-600 rounded-full" style="width:88%"></div></div></div>
+              <div><div class="flex justify-between mb-1"><span class="text-xs text-marca-600 font-medium">Zona Sul</span><span class="text-xs text-marca-500">98 corridas</span></div><div class="h-2 bg-marca-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:62%"></div></div></div>
+              <div><div class="flex justify-between mb-1"><span class="text-xs text-marca-600 font-medium">Zona Norte</span><span class="text-xs text-marca-500">67 corridas</span></div><div class="h-2 bg-marca-100 rounded-full overflow-hidden"><div class="h-full bg-blue-300 rounded-full" style="width:42%"></div></div></div>
+              <div><div class="flex justify-between mb-1"><span class="text-xs text-marca-600 font-medium">Zona Leste</span><span class="text-xs text-marca-500">45 corridas</span></div><div class="h-2 bg-marca-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-400 rounded-full" style="width:28%"></div></div></div>
+              <div><div class="flex justify-between mb-1"><span class="text-xs text-marca-600 font-medium">Zona Oeste</span><span class="text-xs text-marca-500">22 corridas</span></div><div class="h-2 bg-marca-100 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:14%"></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drivers Table -->
+        <div class="bg-white rounded-2xl border border-marca-100 shadow-sm overflow-hidden">
+          <div class="p-4 border-b border-marca-100">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-bold text-marca-900 text-sm">Motoristas</h3>
+              <button onclick="painel_administrativo_abrirTarifas()" class="px-3 py-1.5 bg-marca-600 text-white text-xs font-semibold rounded-lg active:scale-95 transition-all hover:bg-marca-700 shadow-sm flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>Tarifas</button>
+            </div>
+            <div class="relative"><input type="text" id="painel-busca-motorista" oninput="painel_administrativo_filtrarMotoristas()" placeholder="Buscar motorista..." class="w-full pl-10 pr-4 py-2.5 bg-marca-50 border border-marca-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all"></div>
+          </div>
+          <div class="divide-y divide-marca-50" id="painel-lista-motoristas"></div>
+          <div id="painel-vazio-motoristas" class="hidden p-8 text-center"><div class="w-14 h-14 mx-auto mb-3 rounded-full bg-marca-50 flex items-center justify-center"><svg class="w-7 h-7 text-marca-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div><p class="text-sm text-marca-400">Nenhum motorista encontrado</p></div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-3 gap-3">
+          <button onclick="painel_administrativo_abrirRelatorios()" class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm flex flex-col items-center gap-2 active:scale-95 transition-all hover:shadow-md"><div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center"><svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><span class="text-xs font-medium text-marca-700 text-center">Relatórios</span></button>
+          <button onclick="painel_administrativo_abrirRegioes()" class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm flex flex-col items-center gap-2 active:scale-95 transition-all hover:shadow-md"><div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center"><svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/></svg></div><span class="text-xs font-medium text-marca-700 text-center">Regiões</span></button>
+          <button onclick="painel_administrativo_abrirConfig()" class="bg-white rounded-2xl p-4 border border-marca-100 shadow-sm flex flex-col items-center gap-2 active:scale-95 transition-all hover:shadow-md"><div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center"><svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><span class="text-xs font-medium text-marca-700 text-center">Config</span></button>
+        </div>
+      </div>
+
+      <!-- Modals -->
+      <div id="painel-modal-overlay" class="fixed inset-0 bg-black/50 z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="if(event.target===this)fecharModal()">
+        <div id="painel-modal-content" class="bg-white rounded-t-3xl sm:rounded-2xl w-full max-w-md max-h-[85vh] overflow-y-auto"></div>
+      </div>
+
+      <script>
+        var painel_motoristas = [
+          {id:1,nome:'Carlos Mendes',cpf:'***.456.789-**',cel:'(11) 98765-4321',status:'ativo',placa:'ABC-1234',veiculo:'Honda CG 160',cor:'azul',avaliacao:4.8,corridas:1243,diaria:true,ultimaDiaria:'2025-01-15',cadastro:'2024-03-10'},
+          {id:2,nome:'Ana Ferreira',cpf:'***.123.456-**',cel:'(11) 91234-5678',status:'ativo',placa:'DEF-5678',veiculo:'Yamaha Fazer 250',cor:'preta',avaliacao:4.9,corridas:892,diaria:true,ultimaDiaria:'2025-01-15',cadastro:'2024-05-22'},
+          {id:3,nome:'Roberto Lima',cpf:'***.789.012-**',cel:'(11) 99876-5432',status:'bloqueado',placa:'GHI-9012',veiculo:'Honda Pop 110i',cor:'vermelha',avaliacao:3.2,corridas:156,diaria:false,ultimaDiaria:'2025-01-10',cadastro:'2024-08-01'},
+          {id:4,nome:'Juliana Santos',cpf:'***.234.567-**',cel:'(11) 97654-3210',status:'ativo',placa:'JKL-3456',veiculo:'Honda Biz 125',cor:'branca',avaliacao:4.7,corridas:567,diaria:true,ultimaDiaria:'2025-01-15',cadastro:'2024-06-15'},
+          {id:5,nome:'Fernando Oliveira',cpf:'***.890.123-**',cel:'(11) 96543-2109',status:'pendente',placa:'MNO-7890',veiculo:'Yamaha NMax 160',cor:'cinza',avaliacao:0,corridas:0,diaria:false,ultimaDiaria:'',cadastro:'2025-01-14'},
+          {id:6,nome:'Patricia Costa',cpf:'***.567.890-**',cel:'(11) 95432-1098',status:'ativo',placa:'PQR-1234',veiculo:'Honda PCX 160',cor:'azul',avaliacao:4.5,corridas:334,diaria:true,ultimaDiaria:'2025-01-15',cadastro:'2024-09-03'},
+          {id:7,nome:'Ricardo Souza',cpf:'***.345.678-**',cel:'(11) 94321-0987',status:'bloqueado',placa:'STU-5678',veiculo:'Suzuki Burgman',cor:'preta',avaliacao:2.9,corridas:89,diaria:false,ultimaDiaria:'2025-01-05',cadastro:'2024-11-20'},
+          {id:8,nome:'Camila Rodrigues',cpf:'***.678.901-**',cel:'(11) 93210-9876',status:'pendente',placa:'VWX-9012',veiculo:'Honda Elite 125',cor:'vermelha',avaliacao:0,corridas:0,diaria:false,ultimaDiaria:'',cadastro:'2025-01-13'},
+          {id:9,nome:'Marcos Pereira',cpf:'***.012.345-**',cel:'(11) 92109-8765',status:'ativo',placa:'YZA-3456',veiculo:'Honda Lead 110',cor:'prata',avaliacao:4.6,corridas:445,diaria:true,ultimaDiaria:'2025-01-15',cadastro:'2024-07-28'},
+          {id:10,nome:'Luciana Almeida',cpf:'***.456.789-**',cel:'(11) 91098-7654',status:'pendente',placa:'BCD-7890',veiculo:'Yamaha Crosser 150',cor:'verde',avaliacao:0,corridas:0,diaria:false,ultimaDiaria:'',cadastro:'2025-01-15'}
+        ];
+
+        function painel_administrativo_getIniciais(nome) {
+          var p = nome.split(' ');
+          return (p[0][0] + (p.length > 1 ? p[p.length-1][0] : '')).toUpperCase();
+        }
+
+        function painel_administrativo_getCorAvatar(status) {
+          if (status === 'ativo') return 'bg-emerald-100 text-emerald-700';
+          if (status === 'bloqueado') return 'bg-red-100 text-red-700';
+          return 'bg-amber-100 text-amber-700';
+        }
+
+        function painel_administrativo_renderMotoristas(lista) {
+          var container = document.getElementById('painel-lista-motoristas');
+          var vazio = document.getElementById('painel-vazio-motoristas');
+          if (lista.length === 0) {
+            container.innerHTML = '';
+            vazio.classList.remove('hidden');
+            return;
+          }
+          vazio.classList.add('hidden');
+          var html = '';
+          lista.forEach(function(m) {
+            var statusClass = m.status === 'ativo' ? 'bg-emerald-100 text-emerald-700' : m.status === 'bloqueado' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700';
+            var statusLabel = m.status === 'ativo' ? 'Ativo' : m.status === 'bloqueado' ? 'Bloqueado' : 'Pendente';
+            html += '<div onclick="painel_administrativo_abrirDetalhe(' + m.id + ')" class="flex items-center gap-3 p-3 hover:bg-marca-50/50 transition-colors cursor-pointer active:bg-marca-100/50">' +
+              '<div class="w-10 h-10 rounded-full ' + painel_administrativo_getCorAvatar(m.status) + ' flex items-center justify-center text-xs font-bold flex-shrink-0">' + painel_administrativo_getIniciais(m.nome) + '</div>' +
+              '<div class="flex-1 min-w-0"><p class="text-sm font-semibold text-marca-900 truncate">' + m.nome + '</p>' +
+              '<p class="text-xs text-marca-400">' + m.veiculo + ' · ' + m.placa + '</p></div>' +
+              '<div class="flex items-center gap-2 flex-shrink-0">' +
+              '<span class="badge ' + statusClass + ' text-[11px] px-2 py-0.5 rounded-full font-medium">' + statusLabel + '</span>' +
+              (m.status === 'pendente' ? '<button onclick="event.stopPropagation();painel_administrativo_aprovar(' + m.id + ')" class="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center active:scale-90 transition-all hover:bg-emerald-600 shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></button>' : '') +
+              '</div></div>';
+          });
+          container.innerHTML = html;
+        }
+
+        function painel_administrativo_filtrarMotoristas() {
+          var q = document.getElementById('painel-busca-motorista').value.toLowerCase();
+          if (!q) { painel_administrativo_renderMotoristas(painel_motoristas); return; }
+          var filtrados = painel_motoristas.filter(function(m) {
+            return m.nome.toLowerCase().includes(q) || m.placa.toLowerCase().includes(q) || m.veiculo.toLowerCase().includes(q) || m.status.includes(q);
+          });
+          painel_administrativo_renderMotoristas(filtrados);
+        }
+
+        function painel_administrativo_abrirDetalhe(id) {
+          var m = painel_motoristas.find(function(x) { return x.id === id; });
+          if (!m) return;
+          var statusLabel = m.status === 'ativo' ? 'Ativo' : m.status === 'bloqueado' ? 'Bloqueado' : 'Pendente';
+          var statusClass = m.status === 'ativo' ? 'bg-emerald-100 text-emerald-700' : m.status === 'bloqueado' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700';
+          var diariaLabel = m.diaria ? 'Paga até hoje' : 'Pendente / Vencida';
+          var diariaClass = m.diaria ? 'text-emerald-600' : 'text-red-500';
+          var html = '<div class="p-5 space-y-4">' +
+            '<div class="flex items-center gap-3">' +
+            '<div class="w-14 h-14 rounded-full ' + painel_administrativo_getCorAvatar(m.status) + ' flex items-center justify-center text-lg font-bold">' + painel_administrativo_getIniciais(m.nome) + '</div>' +
+            '<div><p class="font-display font-bold text-marca-900 text-lg">' + m.nome + '</p><span class="badge ' + statusClass + ' text-xs px-2 py-0.5 rounded-full font-medium">' + statusLabel + '</span></div></div>' +
+            '<div class="grid grid-cols-3 gap-3">' +
+            '<div class="bg-marca-50 rounded-xl p-3 text-center"><p class="font-display font-bold text-marca-900 text-lg">' + m.avaliacao + '</p><p class="text-[10px] text-marca-500">Avaliação</p></div>' +
+            '<div class="bg-marca-50 rounded-xl p-3 text-center"><p class="font-display font-bold text-marca-900 text-lg">' + m.corridas + '</p><p class="text-[10px] text-marca-500">Corridas</p></div>' +
+            '<div class="bg-marca-50 rounded-xl p-3 text-center"><p class="font-display font-bold text-lg ' + diariaClass + '">' + (m.diaria ? 'R$80' : '—') + '</p><p class="text-[10px] text-marca-500">Diária</p></div></div>' +
+            '<div class="space-y-2"><p class="text-xs font-semibold text-marca-500 uppercase tracking-wider">Informações</p>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Veículo</span><span class="text-sm text-marca-900 font-medium">' + m.veiculo + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Placa</span><span class="text-sm text-marca-900 font-medium">' + m.placa + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Cor</span><span class="text-sm text-marca-900 font-medium capitalize">' + m.cor + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">CPF</span><span class="text-sm text-marca-900 font-medium">' + m.cpf + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Celular</span><span class="text-sm text-marca-900 font-medium">' + m.cel + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Cadastro</span><span class="text-sm text-marca-900 font-medium">' + m.cadastro + '</span></div>' +
+            '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Diária</span><span class="text-sm font-semibold ' + diariaClass + '">' + diariaLabel + '</span></div>' +
+            (m.ultimaDiaria ? '<div class="flex justify-between py-2 border-b border-marca-100"><span class="text-sm text-marca-600">Última diária</span><span class="text-sm text-marca-900 font-medium">' + m.ultimaDiaria + '</span></div>' : '') + '</div>';
+          if (m.status === 'pendente') {
+            html += '<div class="flex gap-2 pt-2">' +
+              '<button onclick="painel_administrativo_aprovar(' + m.id + ');fecharModal()" class="flex-1 py-3 bg-emerald-500 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-emerald-600 shadow-sm">Aprovar Cadastro</button>' +
+              '<button onclick="painel_administrativo_reprovar(' + m.id + ');fecharModal()" class="flex-1 py-3 bg-red-500 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-red-600 shadow-sm">Reprovar</button></div>';
+          }
+          if (m.status === 'bloqueado') {
+            html += '<button onclick="painel_administrativo_desbloquear(' + m.id + ');fecharModal()" class="w-full py-3 bg-marca-600 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-marca-700 shadow-sm mt-2">Desbloquear Motorista</button>';
+          }
+          html += '</div>';
+          abrirModal(html, 'Detalhes do Motorista');
+        }
+
+        function painel_administrativo_aprovar(id) {
+          var m = painel_motoristas.find(function(x) { return x.id === id; });
+          if (m) { m.status = 'ativo'; painel_administrativo_renderMotoristas(painel_motoristas); toast('Motorista ' + m.nome + ' aprovado com sucesso!', 'ok'); }
+        }
+
+        function painel_administrativo_reprovar(id) {
+          var m = painel_motoristas.find(function(x) { return x.id === id; });
+          if (m) { m.status = 'bloqueado'; painel_administrativo_renderMotoristas(painel_motoristas); toast('Cadastro de ' + m.nome + ' reprovado.', 'erro'); }
+        }
+
+        function painel_administrativo_desbloquear(id) {
+          var m = painel_motoristas.find(function(x) { return x.id === id; });
+          if (m) { m.status = 'ativo'; painel_administrativo_renderMotoristas(painel_motoristas); toast('Motorista ' + m.nome + ' desbloqueado.', 'ok'); }
+        }
+
+        function painel_administrativo_mostrarPendentes() {
+          var pendentes = painel_motoristas.filter(function(m) { return m.status === 'pendente'; });
+          var html = '<div class="p-4 space-y-3">';
+          pendentes.forEach(function(m) {
+            html += '<div class="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">' +
+              '<div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">' + painel_administrativo_getIniciais(m.nome) + '</div>' +
+              '<div class="flex-1"><p class="text-sm font-semibold text-marca-900">' + m.nome + '</p><p class="text-xs text-marca-400">' + m.veiculo + ' · ' + m.placa + '</p></div>' +
+              '<div class="flex gap-2"><button onclick="painel_administrativo_aprovar(' + m.id + ');painel_administrativo_mostrarPendentes()" class="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center active:scale-90 transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></button></div></div>';
+          });
+          html += '</div>';
+          abrirModal(html, 'Aprovações Pendentes (' + pendentes.length + ')');
+        }
+
+        function painel_administrativo_abrirTarifas() {
+          var html = '<div class="p-4 space-y-4">' +
+            '<p class="text-sm text-marca-500">Defina o valor base por km para cada região:</p>' +
+            '<div class="space-y-3">' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm font-medium text-marca-800">Centro</span><div class="flex items-center gap-2"><span class="text-sm text-marca-600">R$</span><input type="number" value="2.50" step="0.10" class="w-20 px-2 py-1.5 bg-white border border-marca-200 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-marca-500"></div></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm font-medium text-marca-800">Zona Sul</span><div class="flex items-center gap-2"><span class="text-sm text-marca-600">R$</span><input type="number" value="3.00" step="0.10" class="w-20 px-2 py-1.5 bg-white border border-marca-200 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-marca-500"></div></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm font-medium text-marca-800">Zona Norte</span><div class="flex items-center gap-2"><span class="text-sm text-marca-600">R$</span><input type="number" value="3.50" step="0.10" class="w-20 px-2 py-1.5 bg-white border border-marca-200 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-marca-500"></div></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm font-medium text-marca-800">Zona Leste</span><div class="flex items-center gap-2"><span class="text-sm text-marca-600">R$</span><input type="number" value="2.80" step="0.10" class="w-20 px-2 py-1.5 bg-white border border-marca-200 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-marca-500"></div></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm font-medium text-marca-800">Zona Oeste</span><div class="flex items-center gap-2"><span class="text-sm text-marca-600">R$</span><input type="number" value="3.20" step="0.10" class="w-20 px-2 py-1.5 bg-white border border-marca-200 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-marca-500"></div></div>' +
+            '</div>' +
+            '<div class="flex items-center justify-between p-3 bg-amber-50 rounded-xl border border-amber-200"><span class="text-sm font-medium text-amber-800">Diária (motorista)</span><div class="flex items-center gap-2"><span class="text-sm text-amber-600">R$</span><input type="number" value="80" step="10" class="w-20 px-2 py-1.5 bg-white border border-amber-300 rounded-lg text-sm text-right focus:outline-none focus:ring-2 focus:ring-amber-500"></div></div>' +
+            '<button onclick="fecharModal();toast(\'Tarifas atualizadas com sucesso!\',\'ok\')" class="w-full py-3 bg-marca-600 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-marca-700 shadow-sm">Salvar Tarifas</button></div>';
+          abrirModal(html, 'Configurar Tarifas');
+        }
+
+        function painel_administrativo_abrirRelatorios() {
+          var html = '<div class="p-4 space-y-4">' +
+            '<p class="text-sm text-marca-500">Relatórios financeiros e operacionais:</p>' +
+            '<div class="space-y-3">' +
+            '<button onclick="fecharModal();toast(\'Relatório gerado com sucesso!\',\'ok\')" class="w-full flex items-center gap-3 p-4 bg-marca-50 rounded-xl hover:bg-marca-100 transition-colors text-left active:scale-[0.98]"><div class="w-10 h-10 rounded-xl bg-marca-600 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><div><p class="text-sm font-semibold text-marca-900">Receita — Janeiro 2025</p><p class="text-xs text-marca-500">R$ 18.430 em diárias · 1.247 corridas</p></div></button>' +
+            '<button onclick="fecharModal();toast(\'Relatório gerado com sucesso!\',\'ok\')" class="w-full flex items-center gap-3 p-4 bg-marca-50 rounded-xl hover:bg-marca-100 transition-colors text-left active:scale-[0.98]"><div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div><div><p class="text-sm font-semibold text-marca-900">Desempenho — Motoristas</p><p class="text-xs text-marca-500">Top 10 motoristas · Avaliação média 4.6</p></div></button>' +
+            '<button onclick="fecharModal();toast(\'Relatório gerado com sucesso!\',\'ok\')" class="w-full flex items-center gap-3 p-4 bg-marca-50 rounded-xl hover:bg-marca-100 transition-colors text-left active:scale-[0.98]"><div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><p class="text-sm font-semibold text-marca-900">Horários de Pico</p><p class="text-xs text-marca-500">Análise de demanda por faixa horária</p></div></button>' +
+            '</div></div>';
+          abrirModal(html, 'Relatórios');
+        }
+
+        function painel_administrativo_abrirRegioes() {
+          var regioes = [
+            {nome:'Centro',demanda:142,ativo:true},
+            {nome:'Zona Sul',demanda:98,ativo:true},
+            {nome:'Zona Norte',demanda:67,ativo:true},
+            {nome:'Zona Leste',demanda:45,ativo:false},
+            {nome:'Zona Oeste',demanda:22,ativo:false}
+          ];
+          var html = '<div class="p-4 space-y-4">';
+          regioes.forEach(function(r) {
+            html += '<div class="flex items-center justify-between p-3 ' + (r.ativo ? 'bg-emerald-50 border border-emerald-200' : 'bg-marca-50 border border-marca-200') + ' rounded-xl">' +
+              '<div><p class="text-sm font-semibold text-marca-900">' + r.nome + '</p><p class="text-xs text-marca-500">' + r.demanda + ' corridas hoje</p></div>' +
+              '<span class="badge ' + (r.ativo ? 'bg-emerald-100 text-emerald-700' : 'bg-marca-100 text-marca-500') + ' text-xs px-2 py-0.5 rounded-full font-medium">' + (r.ativo ? 'Ativa' : 'Inativa') + '</span></div>';
+          });
+          html += '<button onclick="fecharModal();toast(\'Configurações de região atualizadas!\',\'ok\')" class="w-full py-3 bg-marca-600 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-marca-700 shadow-sm">Salvar Regiões</button></div>';
+          abrirModal(html, 'Gerenciar Regiões');
+        }
+
+        function painel_administrativo_abrirConfig() {
+          var html = '<div class="p-4 space-y-4">' +
+            '<p class="text-sm text-marca-500">Configurações gerais da plataforma:</p>' +
+            '<div class="space-y-3">' +
+            '<div><label class="text-xs font-semibold text-marca-700 block mb-1">Nome do App</label><input type="text" value="MotoRápido" class="w-full px-3 py-2.5 bg-marca-50 border border-marca-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-marca-500"></div>' +
+            '<div><label class="text-xs font-semibold text-marca-700 block mb-1">Valor da Diária (R$)</label><input type="number" value="80" step="10" class="w-full px-3 py-2.5 bg-marca-50 border border-marca-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-marca-500"></div>' +
+            '<div><label class="text-xs font-semibold text-marca-700 block mb-1">Margem de preço corrida (%)</label><input type="number" value="0" class="w-full px-3 py-2.5 bg-marca-50 border border-marca-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-marca-500"></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm text-marca-800 font-medium">Notificações Push</span><div class="w-11 h-6 bg-marca-600 rounded-full relative cursor-pointer" onclick="this.classList.toggle('bg-marca-600');this.classList.toggle('bg-marca-300');this.querySelector('div').classList.toggle('translate-x-5');this.querySelector('div').classList.toggle('translate-x-0.5')"><div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow translate-x-5 transition-all"></div></div></div>' +
+            '<div class="flex items-center justify-between p-3 bg-marca-50 rounded-xl"><span class="text-sm text-marca-800 font-medium">Solicitar foto do documento</span><div class="w-11 h-6 bg-marca-600 rounded-full relative cursor-pointer" onclick="this.classList.toggle('bg-marca-600');this.classList.toggle('bg-marca-300');this.querySelector('div').classList.toggle('translate-x-5');this.querySelector('div').classList.toggle('translate-x-0.5')"><div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow translate-x-5 transition-all"></div></div></div>' +
+            '</div>' +
+            '<button onclick="fecharModal();toast(\'Configurações salvas!\',\'ok\')" class="w-full py-3 bg-marca-600 text-white text-sm font-semibold rounded-xl active:scale-95 transition-all hover:bg-marca-700 shadow-sm">Salvar Configurações</button></div>';
+          abrirModal(html, 'Configurações');
+        }
+
+        function painel_administrativo_toggleNotificacoes() {
+          var badge = document.getElementById('painel-badge-notif');
+          badge.textContent = '0';
+          badge.classList.add('hidden');
+          toast('Notificações marcadas como lidas.', 'info');
+        }
+
+        // Init
+        painel_administrativo_renderMotoristas(painel_motoristas);
+      </script>
+    </section>
+
     <!-- TELAS -->
       </div>
     </main>
