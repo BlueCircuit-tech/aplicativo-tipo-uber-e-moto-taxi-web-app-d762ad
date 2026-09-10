@@ -1535,6 +1535,460 @@
 
 ```html
 
+    <section data-tela="motorista-perfil-bloqueado" class="hidden">
+      <div class="px-5 pt-6 pb-4">
+        <!-- Header da tela -->
+        <div class="mb-6">
+          <h1 class="font-display text-2xl font-bold text-gray-900">Perfil Bloqueado</h1>
+          <p class="text-gray-500 text-sm mt-1">Realize o pagamento da diária para liberar seu acesso</p>
+        </div>
+
+        <!-- Card principal: bloqueio -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-5 text-center">
+          <!-- Ilustração cadeado com animação -->
+          <div class="mx-auto w-28 h-28 rounded-full bg-gray-100 flex items-center justify-center mb-5">
+            <svg class="w-14 h-14 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              <circle cx="12" cy="16" r="1"/>
+            </svg>
+          </div>
+
+          <h2 class="font-display text-lg font-bold text-gray-900 mb-1">Acesso suspenso</h2>
+          <p class="text-gray-500 text-sm mb-5 leading-relaxed">
+            Seu perfil está bloqueado. Para liberar o acesso, realize o pagamento da diária de <strong class="text-gray-800">R$ 15,00</strong>.
+          </p>
+
+          <!-- Botões de pagamento -->
+          <div class="space-y-3">
+            <button onclick="motorista_perfil_bloqueado_pagarPix()" class="w-full bg-marca-600 hover:bg-marca-700 active:scale-[0.97] text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-md hover:shadow-lg">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <span>Pagar com Pix</span>
+            </button>
+            <button onclick="motorista_perfil_bloqueado_abrirCartao()" class="w-full bg-white hover:bg-gray-50 active:scale-[0.97] text-marca-600 border-2 border-marca-600 font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 shadow-sm hover:shadow-md">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Pagar com Cartão</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cards de indicadores financeiros -->
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="bg-white rounded-xl p-3 border border-gray-100 text-center shadow-sm">
+            <div class="text-xs text-gray-400 mb-1 font-body">Diária</div>
+            <div class="font-display font-bold text-base text-gray-800">R$ 15</div>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-gray-100 text-center shadow-sm">
+            <div class="text-xs text-gray-400 mb-1 font-body">Vencimento</div>
+            <div class="font-display font-bold text-base text-red-500">Hoje</div>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-gray-100 text-center shadow-sm">
+            <div class="text-xs text-gray-400 mb-1 font-body">Status</div>
+            <div class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span><span class="font-display font-bold text-sm text-red-500">Bloq.</span></div>
+          </div>
+        </div>
+
+        <!-- Detalhes da diária -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+          <h3 class="font-display font-semibold text-gray-900 mb-3 text-sm uppercase tracking-wide">Detalhes da diária</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+              <div class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Vencimento
+              </div>
+              <span class="font-semibold text-gray-800 text-sm" id="mpb-vencimento"></span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+              <div class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Valor
+              </div>
+              <span class="font-semibold text-gray-800 text-sm">R$ 15,00</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+              <div class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Plano
+              </div>
+              <span class="badge bg-blue-50 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded-full">Diário</span>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <div class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Liberação
+              </div>
+              <span class="text-green-600 font-semibold text-sm">Automática</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aviso webhook -->
+        <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-5 flex gap-3">
+          <svg class="w-5 h-5 text-marca-600 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p class="text-blue-800 text-xs leading-relaxed">Após a confirmação do pagamento, seu perfil será liberado <strong>automaticamente via webhook</strong>. Você receberá uma notificação em instantes.</p>
+        </div>
+
+        <!-- Links auxiliares -->
+        <div class="flex flex-col gap-2 mb-6">
+          <button onclick="motorista_perfil_bloqueado_abrirHistorico()" class="w-full text-left flex items-center justify-between bg-white hover:bg-gray-50 rounded-xl p-4 transition-colors border border-gray-100">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center">
+                <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <span class="text-sm font-semibold text-gray-700">Histórico de diárias</span>
+            </div>
+            <svg class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button onclick="motorista_perfil_bloqueado_abrirSuporte()" class="w-full text-left flex items-center justify-between bg-white hover:bg-gray-50 rounded-xl p-4 transition-colors border border-gray-100">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center">
+                <svg class="w-4 h-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <span class="text-sm font-semibold text-gray-700">Suporte</span>
+            </div>
+            <svg class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+        <!-- Histórico resumido -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+          <h3 class="font-display font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wide">Últimas diárias</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600 font-bold text-xs font-display">25</div>
+                <div><div class="text-sm font-semibold text-gray-800">15/01/2026</div><div class="text-xs text-gray-400">Pix</div></div>
+              </div>
+              <span class="badge bg-green-50 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">Pago</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600 font-bold text-xs font-display">24</div>
+                <div><div class="text-sm font-semibold text-gray-800">14/01/2026</div><div class="text-xs text-gray-400">Cartão</div></div>
+              </div>
+              <span class="badge bg-green-50 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">Pago</span>
+            </div>
+            <div class="flex items-center justify-between py-2">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600 font-bold text-xs font-display">23</div>
+                <div><div class="text-sm font-semibold text-gray-800">13/01/2026</div><div class="text-xs text-gray-400">Pix</div></div>
+              </div>
+              <span class="badge bg-green-50 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">Pago</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico de atividade: diárias pagas no mês -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+          <h3 class="font-display font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wide">Diárias pagas — Jan 2026</h3>
+          <div class="flex items-end justify-between gap-1.5 h-28">
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-marca-500 rounded-t-md" style="height:70%"></div>
+              <span class="text-[10px] text-gray-400">S</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-marca-500 rounded-t-md" style="height:100%"></div>
+              <span class="text-[10px] text-gray-400">T</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-marca-500 rounded-t-md" style="height:85%"></div>
+              <span class="text-[10px] text-gray-400">Q</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-marca-500 rounded-t-md" style="height:60%"></div>
+              <span class="text-[10px] text-gray-400">Q</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-marca-500 rounded-t-md" style="height:90%"></div>
+              <span class="text-[10px] text-gray-400">S</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-gray-200 rounded-t-md" style="height:0%"></div>
+              <span class="text-[10px] text-gray-400">S</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 flex-1">
+              <div class="w-full bg-gray-200 rounded-t-md" style="height:0%"></div>
+              <span class="text-[10px] text-gray-400">D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: Pagamento Pix -->
+      <div id="mpb-modal-pix" class="hidden fixed inset-0 bg-black/50 z-50 flex items-end justify-center" onclick="if(event.target===this)fecharModal()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] p-6 animate-[slideUp_0.3s_ease]">
+          <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+          <h3 class="font-display text-lg font-bold text-gray-900 text-center mb-1">Pagamento via Pix</h3>
+          <p class="text-gray-500 text-sm text-center mb-5">Escaneie o QR Code ou copie o código</p>
+          <!-- QR Code simulado -->
+          <div class="w-44 h-44 mx-auto bg-gray-900 rounded-xl mb-5 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-36 h-36">
+              <rect x="0" y="0" width="100" height="100" fill="white"/>
+              <rect x="5" y="5" width="25" height="25" fill="black"/>
+              <rect x="10" y="10" width="15" height="15" fill="white"/>
+              <rect x="13" y="13" width="9" height="9" fill="black"/>
+              <rect x="70" y="5" width="25" height="25" fill="black"/>
+              <rect x="75" y="10" width="15" height="15" fill="white"/>
+              <rect x="78" y="13" width="9" height="9" fill="black"/>
+              <rect x="5" y="70" width="25" height="25" fill="black"/>
+              <rect x="10" y="75" width="15" height="15" fill="white"/>
+              <rect x="13" y="78" width="9" height="9" fill="black"/>
+              <rect x="40" y="5" width="5" height="5" fill="black"/><rect x="50" y="5" width="5" height="5" fill="black"/><rect x="60" y="5" width="5" height="5" fill="black"/>
+              <rect x="40" y="15" width="5" height="5" fill="black"/><rect x="55" y="15" width="5" height="5" fill="black"/>
+              <rect x="40" y="40" width="5" height="5" fill="black"/><rect x="50" y="40" width="5" height="5" fill="black"/><rect x="60" y="40" width="5" height="5" fill="black"/><rect x="70" y="40" width="5" height="5" fill="black"/><rect x="80" y="40" width="5" height="5" fill="black"/><rect x="90" y="40" width="5" height="5" fill="black"/>
+              <rect x="5" y="40" width="5" height="5" fill="black"/><rect x="15" y="40" width="5" height="5" fill="black"/><rect x="25" y="40" width="5" height="5" fill="black"/>
+              <rect x="40" y="5" width="5" height="5" fill="black"/><rect x="40" y="15" width="5" height="5" fill="black"/>
+              <rect x="40" y="50" width="5" height="5" fill="black"/><rect x="55" y="50" width="5" height="5" fill="black"/><rect x="70" y="50" width="5" height="5" fill="black"/><rect x="85" y="50" width="5" height="5" fill="black"/>
+              <rect x="40" y="60" width="5" height="5" fill="black"/><rect x="50" y="60" width="5" height="5" fill="black"/><rect x="65" y="60" width="5" height="5" fill="black"/><rect x="80" y="60" width="5" height="5" fill="black"/><rect x="90" y="60" width="5" height="5" fill="black"/>
+              <rect x="40" y="70" width="5" height="5" fill="black"/><rect x="55" y="70" width="5" height="5" fill="black"/><rect x="70" y="70" width="5" height="5" fill="black"/><rect x="85" y="70" width="5" height="5" fill="black"/>
+              <rect x="40" y="80" width="5" height="5" fill="black"/><rect x="50" y="80" width="5" height="5" fill="black"/><rect x="65" y="80" width="5" height="5" fill="black"/><rect x="80" y="80" width="5" height="5" fill="black"/><rect x="90" y="80" width="5" height="5" fill="black"/>
+              <rect x="40" y="90" width="5" height="5" fill="black"/><rect x="55" y="90" width="5" height="5" fill="black"/><rect x="70" y="90" width="5" height="5" fill="black"/><rect x="85" y="90" width="5" height="5" fill="black"/>
+            </svg>
+          </div>
+          <!-- Código Pix copiável -->
+          <div class="bg-gray-50 rounded-xl p-3 mb-4">
+            <div class="flex items-center gap-2">
+              <input id="mpb-pix-code" type="text" value="00020126580014br.gov.bcb.pix0136a1b2c3d4-e5f6-7890-abcd-ef12345678905204000053039865802BR5925BlueCircuit Taxi6009Sao Paulo62070503***63041D3D" readonly class="flex-1 bg-transparent text-[10px] text-gray-500 font-mono border-none outline-none truncate"/>
+              <button onclick="motorista_perfil_bloqueado_copiarPix()" class="bg-marca-600 hover:bg-marca-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors flex-shrink-0">Copiar</button>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 text-center mb-4">Após o pagamento, aguarde alguns segundos para a confirmação automática.</p>
+          <button onclick="fecharModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3.5 rounded-xl transition-colors text-sm">Fechar</button>
+        </div>
+      </div>
+
+      <!-- Modal: Pagamento com Cartão -->
+      <div id="mpb-modal-cartao" class="hidden fixed inset-0 bg-black/50 z-50 flex items-end justify-center" onclick="if(event.target===this)fecharModal()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] p-6 max-h-[85vh] overflow-y-auto animate-[slideUp_0.3s_ease]">
+          <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+          <h3 class="font-display text-lg font-bold text-gray-900 text-center mb-1">Pagamento com Cartão</h3>
+          <p class="text-gray-500 text-sm text-center mb-5">Diária — R$ 15,00</p>
+          <form onsubmit="event.preventDefault();motorista_perfil_bloqueado_pagarCartao()">
+            <!-- Número do cartão -->
+            <label class="block text-xs font-semibold text-gray-600 mb-1.5">Número do cartão</label>
+            <input id="mpb-num-cartao" type="text" placeholder="0000 0000 0000 0000" maxlength="19" oninput="motorista_perfil_bloqueado_mascaraCartao(this)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-800 outline-none focus:border-marca-500 focus:ring-2 focus:ring-marca-100 transition-all mb-4 font-mono" required/>
+            <!-- Nome no cartão -->
+            <label class="block text-xs font-semibold text-gray-600 mb-1.5">Nome impresso</label>
+            <input id="mpb-nome-cartao" type="text" placeholder="Como no cartão" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-800 outline-none focus:border-marca-500 focus:ring-2 focus:ring-marca-100 transition-all mb-4 uppercase" required/>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-600 mb-1.5">Validade</label>
+                <input id="mpb-validade" type="text" placeholder="MM/AA" maxlength="5" oninput="motorista_perfil_bloqueado_mascaraValidade(this)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-800 outline-none focus:border-marca-500 focus:ring-2 focus:ring-marca-100 transition-all font-mono" required/>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-600 mb-1.5">CVV</label>
+                <input id="mpb-cvv" type="text" placeholder="***" maxlength="4" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-800 outline-none focus:border-marca-500 focus:ring-2 focus:ring-marca-100 transition-all font-mono" required/>
+              </div>
+            </div>
+            <!-- Parcelamento -->
+            <label class="block text-xs font-semibold text-gray-600 mb-1.5">Parcelamento</label>
+            <select id="mpb-parcelas" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-800 outline-none focus:border-marca-500 focus:ring-2 focus:ring-marca-100 transition-all mb-5 appearance-none">
+              <option value="1">1x de R$ 15,00</option>
+            </select>
+            <button type="submit" id="mpb-btn-confirmar" class="w-full bg-marca-600 hover:bg-marca-700 active:scale-[0.97] text-white font-semibold py-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Pagar R$ 15,00</span>
+            </button>
+          </form>
+          <button onclick="fecharModal()" class="w-full text-gray-400 text-sm mt-3 py-2 hover:text-gray-600 transition-colors">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Modal: Histórico de diárias -->
+      <div id="mpb-modal-historico" class="hidden fixed inset-0 bg-black/50 z-50 flex items-end justify-center" onclick="if(event.target===this)fecharModal()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] p-6 max-h-[70vh] overflow-y-auto animate-[slideUp_0.3s_ease]">
+          <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+          <h3 class="font-display text-lg font-bold text-gray-900 text-center mb-4">Histórico de Diárias</h3>
+          <div id="mpb-lista-historico" class="space-y-2"></div>
+          <button onclick="fecharModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3.5 rounded-xl transition-colors text-sm mt-4">Fechar</button>
+        </div>
+      </div>
+
+      <!-- Modal: Suporte -->
+      <div id="mpb-modal-suporte" class="hidden fixed inset-0 bg-black/50 z-50 flex items-end justify-center" onclick="if(event.target===this)fecharModal()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] p-6 animate-[slideUp_0.3s_ease]">
+          <div class="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-5"></div>
+          <h3 class="font-display text-lg font-bold text-gray-900 text-center mb-1">Suporte</h3>
+          <p class="text-gray-500 text-sm text-center mb-5">Como podemos ajudar?</p>
+          <div class="space-y-2 mb-4">
+            <button onclick="motorista_perfil_bloqueado_contatarSuporte('whatsapp')" class="w-full flex items-center gap-3 bg-green-50 hover:bg-green-100 text-green-700 rounded-xl p-4 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div class="text-left">
+                <div class="font-semibold text-sm">WhatsApp</div>
+                <div class="text-xs opacity-70">(11) 99999-0000</div>
+              </div>
+            </button>
+            <button onclick="motorista_perfil_bloqueado_contatarSuporte('email')" class="w-full flex items-center gap-3 bg-marca-50 hover:bg-marca-100 text-marca-700 rounded-xl p-4 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-marca-600 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="text-left">
+                <div class="font-semibold text-sm">E-mail</div>
+                <div class="text-xs opacity-70">suporte@bluecircuit.com</div>
+              </div>
+            </button>
+          </div>
+          <button onclick="fecharModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3.5 rounded-xl transition-colors text-sm">Fechar</button>
+        </div>
+      </div>
+
+      <!-- Modal: Confirmação de pagamento -->
+      <div id="mpb-modal-sucesso" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-5">
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm text-center">
+          <div class="mx-auto w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-4 animate-[bounceIn_0.5s_ease]">
+            <svg class="w-10 h-10 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-gray-900 mb-1">Pagamento confirmado!</h3>
+          <p class="text-gray-500 text-sm mb-5">Seu perfil será liberado em instantes via webhook.</p>
+          <div class="flex items-center justify-center gap-1 mb-5">
+            <div class="w-2 h-2 bg-marca-600 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-marca-600 rounded-full animate-pulse" style="animation-delay:0.15s"></div>
+            <div class="w-2 h-2 bg-marca-600 rounded-full animate-pulse" style="animation-delay:0.3s"></div>
+          </div>
+          <button onclick="motorista_perfil_bloqueado_irParaMapa()" class="w-full bg-marca-600 hover:bg-marca-700 active:scale-[0.97] text-white font-semibold py-4 rounded-xl transition-all shadow-md">Ir para o mapa</button>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          var vencHoje = new Date();
+          vencHoje.setHours(23, 59, 59, 999);
+          var elVenc = document.getElementById('mpb-vencimento');
+          if (elVenc) elVenc.textContent = 'Hoje, 23:59';
+
+          window.motorista_perfil_bloqueado_pagarPix = function() {
+            var modal = document.getElementById('mpb-modal-pix');
+            if (modal) { modal.classList.remove('hidden'); }
+          };
+
+          window.motorista_perfil_bloqueado_copiarPix = function() {
+            var input = document.getElementById('mpb-pix-code');
+            if (input) {
+              input.select();
+              navigator.clipboard.writeText(input.value).then(function() {
+                toast('Código Pix copiado!', 'ok');
+                setTimeout(function() { fecharModal(); }, 1500);
+                setTimeout(function() {
+                  toast('Pagamento Pix de R$ 15,00 confirmado!', 'ok');
+                  var modal = document.getElementById('mpb-modal-sucesso');
+                  if (modal) modal.classList.remove('hidden');
+                }, 2500);
+              }).catch(function() {
+                toast('Código Pix copiado!', 'ok');
+                setTimeout(function() { fecharModal(); }, 1500);
+                setTimeout(function() {
+                  toast('Pagamento Pix de R$ 15,00 confirmado!', 'ok');
+                  var modal = document.getElementById('mpb-modal-sucesso');
+                  if (modal) modal.classList.remove('hidden');
+                }, 2500);
+              });
+            }
+          };
+
+          window.motorista_perfil_bloqueado_abrirCartao = function() {
+            var modal = document.getElementById('mpb-modal-cartao');
+            if (modal) { modal.classList.remove('hidden'); }
+          };
+
+          window.motorista_perfil_bloqueado_mascaraCartao = function(input) {
+            var v = input.value.replace(/\D/g, '').substring(0, 16);
+            var formatted = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+            input.value = formatted;
+          };
+
+          window.motorista_perfil_bloqueado_mascaraValidade = function(input) {
+            var v = input.value.replace(/\D/g, '').substring(0, 4);
+            if (v.length >= 3) {
+              input.value = v.substring(0, 2) + '/' + v.substring(2);
+            } else {
+              input.value = v;
+            }
+          };
+
+          window.motorista_perfil_bloqueado_pagarCartao = function() {
+            var num = document.getElementById('mpb-num-cartao');
+            if (num && num.value.replace(/\s/g, '').length < 16) {
+              toast('Número do cartão inválido.', 'erro');
+              return;
+            }
+            var cvv = document.getElementById('mpb-cvv');
+            if (cvv && cvv.value.length < 3) {
+              toast('CVV inválido.', 'erro');
+              return;
+            }
+            var btn = document.getElementById('mpb-btn-confirmar');
+            if (btn) {
+              btn.disabled = true;
+              btn.innerHTML = '<svg class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg><span>Processando...</span>';
+            }
+            setTimeout(function() {
+              fecharModal();
+              toast('Pagamento de R$ 15,00 confirmado com cartão!', 'ok');
+              setTimeout(function() {
+                var modal = document.getElementById('mpb-modal-sucesso');
+                if (modal) modal.classList.remove('hidden');
+              }, 800);
+            }, 1800);
+          };
+
+          window.motorista_perfil_bloqueado_abrirHistorico = function() {
+            var container = document.getElementById('mpb-lista-historico');
+            if (!container) return;
+            var historico = [
+              { dia: '15', mes: 'Jan', ano: '2026', metodo: 'Pix', valor: 15.00, status: 'Pago' },
+              { dia: '14', mes: 'Jan', ano: '2026', metodo: 'Cartão', valor: 15.00, status: 'Pago' },
+              { dia: '13', mes: 'Jan', ano: '2026', metodo: 'Pix', valor: 15.00, status: 'Pago' },
+              { dia: '12', mes: 'Jan', ano: '2026', metodo: 'Pix', valor: 15.00, status: 'Pago' },
+              { dia: '11', mes: 'Jan', ano: '2026', metodo: 'Cartão', valor: 15.00, status: 'Pago' },
+              { dia: '10', mes: 'Jan', ano: '2026', metodo: 'Pix', valor: 15.00, status: 'Pago' },
+              { dia: '09', mes: 'Jan', ano: '2026', metodo: 'Pix', valor: 15.00, status: 'Pago' },
+              { dia: '08', mes: 'Jan', ano: '2026', metodo: 'Cartão', valor: 15.00, status: 'Pago' },
+            ];
+            container.innerHTML = historico.map(function(h) {
+              return '<div class="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">' +
+                '<div class="flex items-center gap-3">' +
+                  '<div class="w-10 h-10 rounded-xl bg-green-50 flex flex-col items-center justify-center text-green-600">' +
+                    '<span class="text-xs font-bold font-display leading-none">' + h.dia + '</span>' +
+                    '<span class="text-[9px] font-semibold leading-none mt-0.5">' + h.mes + '</span>' +
+                  '</div>' +
+                  '<div><div class="text-sm font-semibold text-gray-800">' + h.metodo + '</div><div class="text-xs text-gray-400">' + h.ano + '</div></div>' +
+                '</div>' +
+                '<div class="text-right">' +
+                  '<div class="text-sm font-semibold text-gray-800">R$ ' + h.valor.toFixed(2).replace('.', ',') + '</div>' +
+                  '<span class="badge bg-green-50 text-green-700 text-[10px] font-semibold px-1.5 py-0.5 rounded-full">' + h.status + '</span>' +
+                '</div>' +
+              '</div>';
+            }).join('');
+            var modal = document.getElementById('mpb-modal-historico');
+            if (modal) modal.classList.remove('hidden');
+          };
+
+          window.motorista_perfil_bloqueado_abrirSuporte = function() {
+            var modal = document.getElementById('mpb-modal-suporte');
+            if (modal) modal.classList.remove('hidden');
+          };
+
+          window.motorista_perfil_bloqueado_contatarSuporte = function(tipo) {
+            fecharModal();
+            if (tipo === 'whatsapp') {
+              toast('Abrindo WhatsApp...', 'info');
+            } else {
+              toast('Copiando e-mail de suporte...', 'ok');
+            }
+          };
+
+          window.motorista_perfil_bloqueado_irParaMapa = function() {
+            var modal = document.getElementById('mpb-modal-sucesso');
+            if (modal) modal.classList.add('hidden');
+            mostrarTela('motorista-corrida-disponivel');
+          };
+        })();
+      </script>
+    </section>
+
     <!-- TELAS -->
       </div>
     </main>
