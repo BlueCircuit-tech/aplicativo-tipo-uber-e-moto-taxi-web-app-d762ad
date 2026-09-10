@@ -865,6 +865,287 @@
   })();
 </script>
 
+    <section data-tela="buscando-motorista" class="hidden">
+  <div id="buscando-content" class="flex flex-col h-full">
+    <div class="flex-1 relative overflow-hidden bg-marca-50">
+      <div id="mapa-simulado" class="absolute inset-0 opacity-90">
+        <svg class="w-full h-full" viewBox="0 0 375 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect fill="#1E3A5F" width="375" height="600"/>
+          <rect fill="#254a73" x="0" y="0" width="375" height="600" opacity="0.3"/>
+          <path d="M0 450 Q60 430 120 460 T240 440 T375 470 L375 600 L0 600 Z" fill="#1a3352" opacity="0.6"/>
+          <path d="M0 480 Q80 460 160 490 T320 475 T375 500 L375 600 L0 600 Z" fill="#162d4a" opacity="0.5"/>
+          <path d="M0 100 Q90 90 180 120 T375 95" stroke="#2d5a8e" stroke-width="3" fill="none" opacity="0.4"/>
+          <path d="M0 200 Q100 180 200 220 T375 190" stroke="#2d5a8e" stroke-width="2" fill="none" opacity="0.3"/>
+          <path d="M50 0 L70 600" stroke="#2d5a8e" stroke-width="2" fill="none" opacity="0.3"/>
+          <path d="M150 0 L130 600" stroke="#2d5a8e" stroke-width="2" fill="none" opacity="0.25"/>
+          <path d="M250 0 L270 600" stroke="#2d5a8e" stroke-width="2" fill="none" opacity="0.3"/>
+          <rect x="10" y="420" width="60" height="30" rx="3" fill="#1a3352" opacity="0.7"/>
+          <rect x="140" y="380" width="80" height="25" rx="3" fill="#1a3352" opacity="0.6"/>
+          <rect x="280" y="300" width="70" height="35" rx="3" fill="#1a3352" opacity="0.7"/>
+          <rect x="60" y="250" width="55" height="20" rx="3" fill="#1a3352" opacity="0.5"/>
+          <rect x="200" y="150" width="90" height="28" rx="3" fill="#1a3352" opacity="0.6"/>
+          <rect x="310" y="80" width="50" height="22" rx="3" fill="#1a3352" opacity="0.5"/>
+        </svg>
+        <div id="pin-origem" class="absolute" style="top:38%;left:22%">
+          <div class="relative">
+            <div class="w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-lg"></div>
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-green-500"></div>
+          </div>
+        </div>
+        <div id="pin-destino" class="absolute" style="top:62%;left:68%">
+          <div class="relative">
+            <div class="w-4 h-4 rounded-full bg-red-500 border-2 border-white shadow-lg"></div>
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-6 border-l-transparent border-r-transparent border-t-red-500"></div>
+          </div>
+        </div>
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="top:0;left:0">
+          <line x1="22%" y1="38%" x2="68%" y2="62%" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.8">
+            <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1s" repeatCount="indefinite"/>
+          </line>
+        </svg>
+        <div id="motoristas-pins"></div>
+      </div>
+      <div class="absolute top-3 left-3 right-3 z-10">
+        <div id="resumo-card" class="bg-white rounded-2xl shadow-xl p-4 transition-all duration-500">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+              <span class="text-xs font-medium text-marca-900/60 uppercase tracking-wider font-body">Corrida solicitada</span>
+            </div>
+            <span class="text-xs text-marca-900/40 font-body" id="tempo-solicitacao">agora</span>
+          </div>
+          <div class="flex items-start gap-3 mb-3">
+            <div class="flex flex-col items-center mt-1">
+              <div class="w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-green-200"></div>
+              <div class="w-0.5 h-8 bg-gray-200 my-0.5"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-red-500 border-2 border-red-200"></div>
+            </div>
+            <div class="flex-1 space-y-2">
+              <div>
+                <p class="text-sm font-semibold text-marca-900 font-body truncate">Av. Paulista, 1578</p>
+                <p class="text-xs text-marca-900/50 font-body">Bela Vista, São Paulo</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-marca-900 font-body truncate">R. Augusta, 420</p>
+                <p class="text-xs text-marca-900/50 font-body">Consolação, São Paulo</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+            <div>
+              <p class="text-xs text-marca-900/50 font-body">Valor estimado</p>
+              <p class="text-xl font-bold text-marca-900 font-display">R$ 18,50</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs text-marca-900/50 font-body">Pagamento</p>
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-5L9 4H4z"/></svg>
+                <span class="text-sm font-semibold text-marca-900 font-body">Pix / Cartão</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="buscando-overlay" class="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 mx-6 text-center max-w-xs w-full">
+          <div class="relative w-16 h-16 mx-auto mb-4">
+            <div class="absolute inset-0 rounded-full border-4 border-marca-100"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-marca-500 border-t-transparent animate-spin"></div>
+            <div class="absolute inset-2 rounded-full border-2 border-marca-200 border-b-transparent animate-spin" style="animation-duration:1.5s;animation-direction:reverse"></div>
+            <svg class="absolute inset-0 m-auto w-5 h-5 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-marca-900 font-body mb-1">Procurando motorista próximo...</p>
+          <p class="text-xs text-marca-900/50 font-body mb-3">Aguarde enquanto encontramos o melhor condutor</p>
+          <div class="flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-sm font-bold text-marca-700 font-body" id="contador-tempo">0:05</span>
+          </div>
+          <p class="text-xs text-marca-900/40 font-body mt-1">tempo de espera</p>
+          <div class="flex items-center justify-center gap-1 mt-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay:0ms"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay:150ms"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-bounce" style="animation-delay:300ms"></div>
+          </div>
+        </div>
+      </div>
+      <div id="motorista-encontrado" class="absolute inset-0 z-20 hidden">
+        <div class="absolute inset-0 bg-marca-900/30 backdrop-blur-sm"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[2rem] shadow-2xl p-6 transform translate-y-full transition-transform duration-500 ease-out" id="motorista-card">
+          <div class="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-5"></div>
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <div class="relative">
+              <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center">
+                <span class="text-lg font-bold text-green-700 font-display">CM</span>
+              </div>
+              <div class="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="text-left">
+              <p class="text-lg font-bold text-marca-900 font-display">Carlos M.</p>
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-bold text-marca-900 font-body">4.9</span>
+                <span class="text-xs text-marca-900/50 font-body">· 327 corridas</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-marca-50 rounded-2xl p-4 mb-5">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-marca-100 flex items-center justify-center">
+                <svg class="w-6 h-6 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="1.5"/><path stroke-linecap="round" stroke-width="1.5" d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-xs text-marca-900/50 font-body">Chegada prevista</p>
+                <p class="text-base font-bold text-marca-900 font-display">3 minutos</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs text-marca-900/50 font-body">Distância</p>
+                <p class="text-base font-bold text-marca-900 font-display">2.1 km</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5 mb-5 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-marca-100 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-marca-900/50 font-body">Veículo</p>
+              <p class="text-sm font-bold text-marca-900 font-body">Honda CG 160</p>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <p class="text-xs text-marca-900/50 font-body">Placa</p>
+              <p class="text-sm font-bold text-marca-900 font-body font-mono">ABC-1234</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button onclick="buscando_motorista_cancelar()" class="flex-1 py-3.5 rounded-xl border-2 border-red-200 text-red-600 font-semibold text-sm font-body active:scale-95 transition-all hover:bg-red-50">
+              Cancelar
+            </button>
+            <button onclick="buscando_motorista_aceitar()" class="flex-[2] py-3.5 rounded-xl bg-marca-500 text-white font-semibold text-sm font-body shadow-lg shadow-marca-500/30 active:scale-95 transition-all hover:bg-marca-600">
+              Confirmar corrida
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  if(typeof buscando_motorista_init !== 'undefined') return;
+  window.buscando_motorista_init = true;
+
+  let timerInterval = null;
+  let elapsedSeconds = 5;
+  let driverFound = false;
+  let searchTimeout = null;
+
+  function buscando_motorista_iniciar() {
+    elapsedSeconds = 5;
+    driverFound = false;
+    document.getElementById('buscando-overlay').classList.remove('hidden');
+    document.getElementById('motorista-encontrado').classList.add('hidden');
+    document.getElementById('motorista-card').style.transform = 'translateY(100%)';
+    document.getElementById('resumo-card').style.opacity = '1';
+    document.getElementById('resumo-card').style.transform = 'translateY(0)';
+    document.getElementById('contador-tempo').textContent = '0:05';
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(buscando_motorista_tick, 1000);
+    buscando_motorista_gerarPins();
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(buscando_motorista_motoristaAchado, 8000 + Math.random() * 4000);
+  }
+
+  function buscando_motorista_tick() {
+    elapsedSeconds++;
+    const m = Math.floor(elapsedSeconds / 60);
+    const s = elapsedSeconds % 60;
+    const el = document.getElementById('contador-tempo');
+    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function buscando_motorista_gerarPins() {
+    const container = document.getElementById('motoristas-pins');
+    if (!container) return;
+    container.innerHTML = '';
+    const posicoes = [
+      { top:'18%', left:'35%' }, { top:'25%', left:'55%' },
+      { top:'32%', left:'40%' }, { top:'45%', left:'30%' },
+      { top:'50%', left:'50%' }, { top:'55%', left:'75%' },
+      { top:'65%', left:'45%' }, { top:'70%', left:'60%' },
+    ];
+    posicoes.forEach(function(pos, i) {
+      const pin = document.createElement('div');
+      pin.className = 'absolute';
+      pin.style.top = pos.top;
+      pin.style.left = pos.left;
+      pin.style.animationDelay = (i * 0.3) + 's';
+      pin.innerHTML = '<div class="relative">' +
+        '<div class="w-3 h-3 rounded-full bg-marca-400 border-2 border-white shadow-md"></div>' +
+        '<div class="absolute inset-0 w-3 h-3 rounded-full bg-marca-400 animate-ping opacity-40"></div>' +
+        '</div>';
+      container.appendChild(pin);
+    });
+  }
+
+  function buscando_motorista_motoristaAchado() {
+    if (driverFound) return;
+    driverFound = true;
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    const overlay = document.getElementById('buscando-overlay');
+    const card = document.getElementById('motorista-encontrado');
+    if (!overlay || !card) return;
+    overlay.classList.add('hidden');
+    card.classList.remove('hidden');
+    requestAnimationFrame(function(){
+      card.querySelector('#motorista-card').style.transform = 'translateY(0)';
+    });
+    toast('Carlos M. aceitou sua corrida!', 'ok');
+  }
+
+  window.buscando_motorista_cancelar = function() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    if (searchTimeout) { clearTimeout(searchTimeout); searchTimeout = null; }
+    driverFound = false;
+    elapsedSeconds = 5;
+    toast('Corrida cancelada', 'info');
+    mostrarTela('passageiro-home');
+  };
+
+  window.buscando_motorista_aceitar = function() {
+    toast('Corrida confirmada! Aguarde o motorista.', 'ok');
+    setTimeout(function() { mostrarTela('corrida-em-andamento'); }, 1200);
+  };
+
+  window.buscando_motorista_contatar = function() {
+    toast('Abrindo chat com Carlos M...', 'info');
+  };
+
+  window.buscando_motorista_ligar = function() {
+    toast('Ligando para Carlos M...', 'info');
+  };
+
+  const observer = new MutationObserver(function() {
+    var el = document.querySelector('[data-tela="buscando-motorista"]');
+    if (el && !el.classList.contains('hidden') && !el.dataset.inicializado) {
+      el.dataset.inicializado = 'true';
+      setTimeout(buscando_motorista_iniciar, 300);
+    }
+  });
+  observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var el = document.querySelector('[data-tela="buscando-motorista"]');
+    if (el && !el.classList.contains('hidden')) {
+      el.dataset.inicializado = 'true';
+      setTimeout(buscando_motorista_iniciar, 300);
+    }
+  });
+})();
+</script>
+
     <!-- TELAS -->
       </div>
     </main>
